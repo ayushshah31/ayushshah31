@@ -10,7 +10,7 @@ card:
   title: ayush@shah
   # Drives the Uptime row. Leave blank to count from your GitHub account's
   # creation date instead.
-  birthday: # TODO: YYYY-MM-DD
+  birthday: 2002-07-04
   # Optional: pin the canvas width in pixels. Left out, it follows the longest
   # line. Only set this if you want a specific size.
   # width: 1080
@@ -18,15 +18,15 @@ card:
 sections:
   - rows:
       - key: OS
-        value: "TODO: set in config.yml" # e.g. macOS 15, Ubuntu 24.04
+        value: Ubuntu 24.04
       - key: Uptime
         id: age_data # value is computed from card.birthday
       - key: Host
-        value: The Lundquist Institute # TODO: confirm
+        value: Google
       - key: Kernel
-        value: "TODO: your role" # e.g. Software Engineer
+        value: Software Engineer
       - key: Editor
-        value: "TODO: set in config.yml" # e.g. VS Code, Neovim
+        value: Antigravity
       - blank: true
 
       - key: Languages.Programming
@@ -34,7 +34,7 @@ sections:
       - key: Languages.Markup
         value: [HTML, CSS, SQL, YAML, JSON]
       - key: Languages.Real
-        value: [English, Hindi, Gujarati] # TODO: confirm
+        value: [English, Hindi, Gujarati, Marathi] # TODO: confirm
       - blank: true
 
       - key: Stack.Frontend
@@ -48,13 +48,9 @@ sections:
 
   - title: Contact
     rows:
-      - key: Email.Work
-        value: Ayush.Shah@lundquist.org
       - key: Email.Personal
         value: shahayush934@gmail.com
       - key: LinkedIn
         value: ayush-ketan-shah
-      - key: LeetCode
-        value: ayushshah39
       - key: Instagram
         value: ayushshah39
