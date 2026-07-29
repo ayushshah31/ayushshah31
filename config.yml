@@ -1,0 +1,60 @@
+# Everything on the right-hand side of the profile card.
+#
+# Edit this file, run `python today.py --offline`, and both SVGs are rebuilt
+# from the numbers already in cache/stats.json — no API token needed.
+#
+# Rows marked TODO were guessed from the old README and the repository itself.
+# Replace them (or delete the row) before you are happy for anyone to see it.
+
+card:
+  title: ayush@shah
+  # Drives the Uptime row. Leave blank to count from your GitHub account's
+  # creation date instead.
+  birthday: # TODO: YYYY-MM-DD
+  # Optional: pin the canvas width in pixels. Left out, it follows the longest
+  # line. Only set this if you want a specific size.
+  # width: 1080
+
+sections:
+  - rows:
+      - key: OS
+        value: "TODO: set in config.yml" # e.g. macOS 15, Ubuntu 24.04
+      - key: Uptime
+        id: age_data # value is computed from card.birthday
+      - key: Host
+        value: The Lundquist Institute # TODO: confirm
+      - key: Kernel
+        value: "TODO: your role" # e.g. Software Engineer
+      - key: Editor
+        value: "TODO: set in config.yml" # e.g. VS Code, Neovim
+      - blank: true
+
+      - key: Languages.Programming
+        value: [Python, JavaScript, Java, C++, Dart]
+      - key: Languages.Markup
+        value: [HTML, CSS, SQL, YAML, JSON]
+      - key: Languages.Real
+        value: [English, Hindi, Gujarati] # TODO: confirm
+      - blank: true
+
+      - key: Stack.Frontend
+        value: [React, Next.js, React Native, Tailwind]
+      - key: Stack.Backend
+        value: [Node.js, Express, Django, Flask]
+      - key: Stack.Data
+        value: [MongoDB, MySQL, Pandas, TensorFlow]
+      - key: Stack.Infra
+        value: [AWS, Firebase, Git, Postman]
+
+  - title: Contact
+    rows:
+      - key: Email.Work
+        value: Ayush.Shah@lundquist.org
+      - key: Email.Personal
+        value: shahayush934@gmail.com
+      - key: LinkedIn
+        value: ayush-ketan-shah
+      - key: LeetCode
+        value: ayushshah39
+      - key: Instagram
+        value: ayushshah39

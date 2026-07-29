@@ -1,0 +1,42 @@
+name: Validate
+
+# Catches a broken config.yml or a layout regression before it reaches the
+# profile, without spending any GitHub API calls.
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+
+jobs:
+  build-offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Rebuild the cards from the cached numbers
+        run: python today.py --offline
+
+      - name: Check the SVGs are well-formed
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          for name in ("dark_mode.svg", "light_mode.svg"):
+              ET.parse(name)
+              print(f"{name} parses")
+          PY
+
+      - name: Check nothing drifted
+        run: |
+          if ! git diff --quiet -- dark_mode.svg light_mode.svg; then
+            echo "::warning::The committed SVGs are out of date. Run"\
+                 "'python today.py --offline' and commit the result."
+            git --no-pager diff --stat -- dark_mode.svg light_mode.svg
+          fi

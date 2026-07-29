@@ -1,0 +1,70 @@
+name: Profile card
+
+on:
+  schedule:
+    # 05:20 UTC daily. Deliberately off the hour: scheduled runs queue behind
+    # everyone else's on-the-hour crons and get delayed.
+    - cron: "20 5 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "assets/**"
+      - "config.yml"
+      - "*.py"
+      - "requirements.txt"
+      - ".github/workflows/profile-card.yml"
+  workflow_dispatch:
+
+# So the job can push the regenerated SVGs back to the branch.
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-card
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Redraw the ASCII portrait
+        run: |
+          photo=$(ls assets/profile.* 2>/dev/null | head -1)
+          if [ -n "$photo" ]; then
+            python photo_to_ascii.py "$photo"
+          else
+            echo "No assets/profile.* — keeping the committed ascii_art.txt"
+          fi
+
+      - name: Rebuild the cards
+        env:
+          USER_NAME: ${{ github.repository_owner }}
+          # A fine-grained PAT saved as ACCESS_TOKEN also counts private and
+          # organisation repositories. Without one the built-in token still
+          # works, it just only sees public activity.
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: python today.py
+
+      - name: Commit the result
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ascii_art.txt cache dark_mode.svg light_mode.svg
+          if git diff --quiet --cached; then
+            echo "Nothing changed today."
+            exit 0
+          fi
+          git commit -m "Update profile card"
+          # The scheduled run races nothing, but a manual dispatch can overlap
+          # with a push, so rebase rather than fail.
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
