@@ -1,9 +1,74 @@
 {
-  "api_calls": 4,
+  "api_calls": 5,
   "commits": 265,
   "contributed": 49,
+  "contributions_recent": [
+    2,
+    5,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    9,
+    6,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    15,
+    0,
+    0,
+    2,
+    1,
+    0
+  ],
+  "contributions_year": 1299,
   "created_at": "2021-03-08T07:16:56Z",
   "followers": 3,
+  "language_bytes": [
+    {
+      "color": "#DA5B0B",
+      "name": "Jupyter Notebook",
+      "share": 0.2327327033361865
+    },
+    {
+      "color": "#3572A5",
+      "name": "Python",
+      "share": 0.17507010917531562
+    },
+    {
+      "color": "#f1e05a",
+      "name": "JavaScript",
+      "share": 0.15301420508607708
+    },
+    {
+      "color": "#00B4AB",
+      "name": "Dart",
+      "share": 0.13188199574450424
+    },
+    {
+      "color": "#3178c6",
+      "name": "TypeScript",
+      "share": 0.06445932728082905
+    },
+    {
+      "color": "#222c37",
+      "name": "ShaderLab",
+      "share": 0.0347248924574979
+    }
+  ],
   "languages": [
     "Dart",
     "JavaScript",
