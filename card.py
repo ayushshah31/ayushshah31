@@ -176,6 +176,15 @@ def language_lines(languages, columns=INFO_COLUMNS):
     label = ". Languages by bytes:"
     span_width = columns - len(label) - 1
 
+    # Shares are of *all* languages, but only the leading few are listed, so
+    # they do not sum to 1. Name the difference rather than stretching the
+    # listed languages to cover it, which would overstate every one of them.
+    listed = sum(language["share"] for language in languages)
+    if listed < 0.995:
+        languages = languages + [
+            {"name": "Other", "share": 1 - listed, "color": "#8b949e"}
+        ]
+
     # Largest-remainder apportionment: floor every share, then hand the leftover
     # cells to whoever was rounded down hardest. Rounding each independently
     # leaves the bar a cell short or a cell long.
