@@ -46,23 +46,30 @@ THEMES = {
 
 
 class Span:
-    """A run of text on one line, optionally coloured and addressable by id."""
+    """A run of text on one line, optionally coloured and addressable by id.
 
-    __slots__ = ("text", "cls", "id")
+    Colour comes either from a stylesheet class or, for language swatches whose
+    colour is whatever GitHub reports, from an explicit fill.
+    """
 
-    def __init__(self, text, cls=None, id=None):
+    __slots__ = ("text", "cls", "id", "fill")
+
+    def __init__(self, text, cls=None, id=None, fill=None):
         self.text = str(text)
         self.cls = cls
         self.id = id
+        self.fill = fill
 
     def render(self):
-        if self.cls is None and self.id is None:
+        if self.cls is None and self.id is None and self.fill is None:
             return escape(self.text)
         attributes = ""
         if self.cls:
             attributes += f' class="{self.cls}"'
         if self.id:
             attributes += f' id="{self.id}"'
+        if self.fill:
+            attributes += f' fill="{escape(self.fill, {chr(34): "&quot;"})}"'
         return f"<tspan{attributes}>{escape(self.text)}</tspan>"
 
     def __len__(self):
@@ -156,6 +163,79 @@ def loc_row(added, deleted, total, columns=INFO_COLUMNS):
     ]
 
 
+def language_lines(languages, columns=INFO_COLUMNS):
+    """A stacked bar of language share, followed by a colour-keyed legend.
+
+    Neofetch ends with a row of palette swatches; this is the same idea, except
+    the colours mean something. Returns an empty list when there is no language
+    data, which is the case for a cache written before this existed.
+    """
+    if not languages:
+        return []
+
+    label = ". Languages by bytes:"
+    span_width = columns - len(label) - 1
+
+    # Largest-remainder apportionment: floor every share, then hand the leftover
+    # cells to whoever was rounded down hardest. Rounding each independently
+    # leaves the bar a cell short or a cell long.
+    exact = [language["share"] * span_width for language in languages]
+    cells = [int(value) for value in exact]
+    for index in sorted(range(len(languages)),
+                        key=lambda i: exact[i] - cells[i], reverse=True):
+        if sum(cells) >= span_width:
+            break
+        cells[index] += 1
+
+    bar = [Span(". ", "cc"), Span("Languages by bytes", "key"), Span(":"), Span(" ")]
+    for language, count in zip(languages, cells):
+        if count:
+            bar.append(Span("█" * count, fill=language["color"]))
+
+    lines = [bar]
+    entries = [(f"{language['name']} {language['share'] * 100:.1f}%",
+                language["color"]) for language in languages]
+
+    # Pack the legend across as many lines as it needs.
+    row_spans, used = [Span("  ")], 2
+    for text, colour in entries:
+        piece = len(text) + 3  # the swatch, its space, and the trailing gap
+        if used + piece > columns and len(row_spans) > 1:
+            lines.append(row_spans)
+            row_spans, used = [Span("  ")], 2
+        row_spans.extend([Span("● ", fill=colour), Span(text, "value"), Span("  ")])
+        used += piece
+    if len(row_spans) > 1:
+        lines.append(row_spans)
+    return lines
+
+
+def sparkline_row(daily, year_total, columns=INFO_COLUMNS):
+    """Recent daily contributions as a terminal sparkline."""
+    if not daily:
+        return []
+
+    # A zero day is the shortest block rather than a space, so the sparkline
+    # keeps a continuous baseline instead of breaking up into islands. Any
+    # non-zero count is lifted clear of that baseline.
+    blocks = "▁▂▃▄▅▆▇█"
+    peak = max(daily)
+    spark = "".join(
+        blocks[0] if count == 0
+        else blocks[max(1, round(count / peak * (len(blocks) - 1)))]
+        for count in daily
+    )
+
+    label, suffix = f"Last {len(daily)} days", f"{year_total:,} this year"
+    prefix = 2 + len(label) + 1
+    gap = columns - prefix - len(spark) - len(suffix) - 1
+    return [[
+        Span(". ", "cc"), Span(label, "key"), Span(":"),
+        Span(filler(gap), "cc"), Span(spark, "addColor"),
+        Span(" "), Span(suffix, "value"),
+    ]]
+
+
 def build_lines(config, stats, uptime, columns=INFO_COLUMNS):
     """Turn the config plus live stats into the right-hand column, line by line."""
     lines = [rule(config["card"]["title"], columns)]
@@ -191,6 +271,11 @@ def build_lines(config, stats, uptime, columns=INFO_COLUMNS):
     ], columns))
     lines.append(loc_row(stats["loc_added"], stats["loc_deleted"],
                          stats["loc_total"], columns))
+    # Both are skipped when absent, so a cache written before they existed
+    # still renders.
+    lines.extend(sparkline_row(stats.get("contributions_recent", []),
+                               stats.get("contributions_year", 0), columns))
+    lines.extend(language_lines(stats.get("language_bytes", []), columns))
     return lines
 
 
@@ -230,9 +315,14 @@ def render(config, stats, ascii_art, uptime, theme):
     palette = THEMES[theme]
     lines = compose(ascii_art, fitted_lines(config, stats, uptime))
 
+    animate = config["card"].get("animate", True)
+    duration = float(config["card"].get("animation_seconds", 2.5))
+    step = duration / max(1, len(lines))
+
     longest = max((sum(len(span) for span in line) for line in lines), default=0)
     width = config["card"].get("width", round(longest * CHAR_WIDTH) + MARGIN * 2)
-    height = LINE_HEIGHT * len(lines) + MARGIN * 2
+    # The animated card ends on an empty prompt line for the cursor to sit on.
+    height = LINE_HEIGHT * (len(lines) + (1 if animate else 0)) + MARGIN * 2
 
     out = [
         "<?xml version='1.0' encoding='UTF-8'?>",
@@ -255,17 +345,73 @@ def render(config, stats, ascii_art, uptime, theme):
         f".addColor {{fill: {palette['added']};}}",
         f".delColor {{fill: {palette['deleted']};}}",
         "text, tspan {white-space: pre;}",
+    ]
+
+    if animate:
+        out.extend([
+            # CSS wins over the clip-path presentation attribute, so this drops
+            # the reveal entirely for readers who ask for less motion.
+            "@media (prefers-reduced-motion: reduce) {",
+            "text {clip-path: none !important;} .cursor {display: none;} }",
+        ])
+
+    out += [
         "</style>",
         f'<rect width="{width}px" height="{height}px" '
         f'fill="{palette["background"]}" rx="15"/>',
     ]
 
-    out.append(f'<text x="{MARGIN}" y="{LINE_HEIGHT + 10}" '
-               f'fill="{palette["text"]}">')
-    for index, line in enumerate(lines):
-        body = "".join(span.render() for span in line)
-        out.append(f'<tspan x="{MARGIN}" y="{LINE_HEIGHT * (index + 1) + 10}">'
-                   f'{body}</tspan>')
-    out.append("</text>")
+    if animate:
+        # Each line is wiped in left to right so the card prints itself like a
+        # terminal. SMIL rather than CSS, because a clip rectangle carries a
+        # static width of "fully open" and the animation only overrides it once
+        # it begins. Anything that parses the file without running the clock —
+        # a rasteriser, a screenshot tool, a stricter image sandbox — is still
+        # before begin, so it draws the finished card instead of a blank one.
+        # The equivalent in CSS needs fill-mode backwards to hold a line hidden
+        # until its turn, and that renders blank in exactly those cases.
+        wipe = min(step * 1.6, duration)
+        out.append("<defs>")
+        for index in range(len(lines)):
+            start = index * step
+            out.append(
+                f'<clipPath id="w{index}">'
+                f'<rect x="0" y="0" width="{width}" height="{height}">'
+                f'<animate attributeName="width" begin="0.01s" '
+                f'dur="{duration}s" fill="freeze" calcMode="linear" '
+                f'values="0;0;{width};{width}" '
+                f'keyTimes="0;{start / duration:.4f};'
+                f'{min(start + wipe, duration) / duration:.4f};1"/>'
+                f"</rect></clipPath>"
+            )
+        out.append("</defs>")
+
+        for index, line in enumerate(lines):
+            body = "".join(span.render() for span in line)
+            out.append(
+                f'<text clip-path="url(#w{index})" x="{MARGIN}" '
+                f'y="{LINE_HEIGHT * (index + 1) + 10}" '
+                f'fill="{palette["text"]}">{body}</text>'
+            )
+
+        baseline = LINE_HEIGHT * (len(lines) + 1) + 10
+        # opacity="0" keeps the cursor off a card that never animates.
+        out.append(
+            f'<rect class="cursor" x="{MARGIN}" y="{baseline - FONT_SIZE + 3}" '
+            f'width="{round(CHAR_WIDTH)}" height="{FONT_SIZE}" '
+            f'fill="{palette["text"]}" opacity="0">'
+            f'<animate attributeName="opacity" begin="{duration}s" dur="1.06s" '
+            f'repeatCount="indefinite" calcMode="discrete" '
+            f'values="1;0" keyTimes="0;0.55"/></rect>'
+        )
+    else:
+        out.append(f'<text x="{MARGIN}" y="{LINE_HEIGHT + 10}" '
+                   f'fill="{palette["text"]}">')
+        for index, line in enumerate(lines):
+            body = "".join(span.render() for span in line)
+            out.append(f'<tspan x="{MARGIN}" y="{LINE_HEIGHT * (index + 1) + 10}">'
+                       f'{body}</tspan>')
+        out.append("</text>")
+
     out.append("</svg>")
     return "\n".join(out) + "\n"

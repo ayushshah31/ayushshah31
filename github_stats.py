@@ -45,9 +45,25 @@ query ($login: String!, $affiliations: [RepositoryAffiliation], $cursor: String)
         stargazerCount
         isPrivate
         primaryLanguage { name }
+        languages(first: 12, orderBy: {field: SIZE, direction: DESC}) {
+          edges { size node { name color } }
+        }
         defaultBranchRef { target { ... on Commit { history { totalCount } } } }
       }
       pageInfo { endCursor hasNextPage }
+    }
+  }
+}
+"""
+
+CONTRIBUTIONS_QUERY = """
+query ($login: String!) {
+  user(login: $login) {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks { contributionDays { date contributionCount } }
+      }
     }
   }
 }
@@ -148,6 +164,39 @@ class GitHubStats:
         )
         return [name for name, _ in counts.most_common(limit)]
 
+    def language_bytes(self, repos, limit=6):
+        """Share of source bytes per language, biggest first.
+
+        Weighted by bytes rather than by repository count, so one enormous
+        vendored directory does not read the same as one small hand-written
+        project. GitHub supplies each language's brand colour.
+        """
+        totals, colours = Counter(), {}
+        for repo in repos:
+            for edge in (repo.get("languages") or {}).get("edges", []):
+                name = edge["node"]["name"]
+                totals[name] += edge["size"]
+                colours[name] = edge["node"]["color"] or "#8b949e"
+
+        overall = sum(totals.values())
+        if not overall:
+            return []
+        return [
+            {"name": name, "share": size / overall, "color": colours[name]}
+            for name, size in totals.most_common(limit)
+        ]
+
+    def contributions(self, days=30):
+        """Daily contribution counts for the last `days` days, plus the year total."""
+        calendar = self.query(CONTRIBUTIONS_QUERY, login=self.username)[
+            "user"]["contributionsCollection"]["contributionCalendar"]
+        daily = [
+            day["contributionCount"]
+            for week in calendar["weeks"]
+            for day in week["contributionDays"]
+        ]
+        return {"recent": daily[-days:], "year_total": calendar["totalContributions"]}
+
     # ------------------------------------------------------------------ loc
 
     def _repo_history(self, owner, name):
@@ -240,6 +289,7 @@ class GitHubStats:
         account = self.account()
         owned = self.repositories(["OWNER"])
         contributed = self.repositories(ALL_AFFILIATIONS)
+        contributions = self.contributions()
         loc = self.lines_of_code(contributed)
 
         return {
@@ -253,6 +303,9 @@ class GitHubStats:
             "loc_deleted": loc["deleted"],
             "loc_total": loc["total"],
             "languages": self.languages(contributed),
+            "language_bytes": self.language_bytes(contributed),
+            "contributions_recent": contributions["recent"],
+            "contributions_year": contributions["year_total"],
             "repos_refreshed": loc["refreshed"],
             "api_calls": self.queries,
         }

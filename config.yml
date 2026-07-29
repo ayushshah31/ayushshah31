@@ -3,14 +3,19 @@
 # Edit this file, run `python today.py --offline`, and both SVGs are rebuilt
 # from the numbers already in cache/stats.json — no API token needed.
 #
-# Rows marked TODO were guessed from the old README and the repository itself.
-# Replace them (or delete the row) before you are happy for anyone to see it.
+# The GitHub Stats block at the bottom of the card is not configured here; it is
+# measured. See docs/SETUP.md.
 
 card:
   title: ayush@shah
   # Drives the Uptime row. Leave blank to count from your GitHub account's
   # creation date instead.
   birthday: 2002-07-04
+  # Print the card line by line, like a terminal, with a cursor blinking at the
+  # end. Set false for a still image.
+  animate: true
+  # How long the whole card takes to print.
+  animation_seconds: 2.5
   # Optional: pin the canvas width in pixels. Left out, it follows the longest
   # line. Only set this if you want a specific size.
   # width: 1080
@@ -34,7 +39,7 @@ sections:
       - key: Languages.Markup
         value: [HTML, CSS, SQL, YAML, JSON]
       - key: Languages.Real
-        value: [English, Hindi, Gujarati, Marathi] # TODO: confirm
+        value: [English, Hindi, Gujarati, Marathi]
       - blank: true
 
       - key: Stack.Frontend

@@ -50,6 +50,63 @@ of the frame). `--help` lists the rest.
 You can also skip the photo and hand-edit `ascii_art.txt` directly. Anything up
 to 42 columns and 25 rows works; the card grows to fit if you go over.
 
+## The typing animation
+
+The card prints itself line by line with a cursor blinking at the end. Turn it
+off in `config.yml`:
+
+```yaml
+card:
+  animate: false
+  animation_seconds: 2.5   # how long the whole card takes to print
+```
+
+It is built with SMIL (`<animate>` driving a clip rectangle) rather than CSS
+animation, and that choice is load-bearing. Each clip rectangle carries a static
+width of *fully open*, and the animation only overrides it once it begins — so
+anything that reads the file without running the clock draws the finished card.
+The natural CSS version needs `animation-fill-mode: backwards` to hold a line
+hidden until its turn, and a renderer that instantiates animations without
+advancing them then paints a **completely blank card**. That is not
+hypothetical; it is what happens under headless Chromium.
+
+If you change any of this, verify by sampling the timeline rather than trusting
+a screenshot delay:
+
+```html
+<script>
+  const s = document.querySelector("svg");
+  s.pauseAnimations();
+  s.setCurrentTime(1.2);   // seconds into the animation
+</script>
+```
+
+Readers who set `prefers-reduced-motion: reduce` get the finished card with no
+reveal and no cursor.
+
+## The language bar and the sparkline
+
+Two rows at the bottom are drawn rather than written:
+
+- **Languages by bytes** — a stacked bar of what you actually write, weighted by
+  source bytes across every repository you have touched, coloured with GitHub's
+  own language colours. Bytes rather than repository count, so one small
+  hand-written project does not outweigh a large one. Cells are apportioned by
+  largest remainder so the bar is always exactly full.
+- **Last 30 days** — daily contributions as a sparkline, with the year total on
+  the right. A zero day draws the shortest block rather than a space, so the
+  baseline stays continuous.
+
+Both cost nothing extra: the language data rides along with the repository query
+that was already being made, and contributions are a single additional call.
+
+Both are skipped entirely when the data is missing, so a `cache/stats.json`
+written before they existed still renders.
+
+One caveat in light mode: a few language colours — GitHub's yellow for
+JavaScript especially — are low contrast on white. They are GitHub's own values,
+used as-is.
+
 ## Editing the text
 
 Everything on the right comes from `config.yml`. A row looks like this:
