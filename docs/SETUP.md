@@ -26,13 +26,9 @@ Save a photo as `assets/profile.jpg` — dragging it into the folder from the
 GitHub web interface is enough. The next Action run converts it and the
 placeholder portrait disappears.
 
-The conversion works best on a photo that is:
-
-- **cropped to head and shoulders.** The card gives the portrait 42 columns by
-  25 rows. A full-length shot loses the face entirely at that size.
-- **brightly lit, with the subject clearly lighter than the background.** The
-  converter maps bright pixels to dense characters, so contrast is what draws
-  the outline.
+The conversion works best on a photo **cropped to head and shoulders**. The card
+gives the portrait 42 columns by 25 rows; a full-length shot loses the face
+entirely at that size. Beyond that the converter adapts to the lighting itself.
 
 To see the result before committing anything:
 
@@ -41,14 +37,58 @@ pip install -r requirements.txt
 python photo_to_ascii.py assets/profile.jpg --preview
 ```
 
-`--preview` prints to the terminal instead of writing `ascii_art.txt`. If the
-portrait comes out too dark or too washed out, the flags worth reaching for are
-`--contrast` (how much of the histogram to clip, try 2–10), `--gamma` (below 1
-brightens the midtones), and `--focus` (where to crop vertically, 0 is the top
-of the frame). `--help` lists the rest.
+`--preview` prints to the terminal instead of writing `ascii_art.txt`.
+
+### How it decides what to draw
+
+Averaging brightness per cell and picking a character off a density ramp — the
+usual approach — falls apart at this size. A face is mostly mid-tones, so once
+each cell is one average there is nothing left to recognise. It produces mush.
+
+So each cell is measured with the **structure tensor** of the image gradients,
+which reports two things an average cannot: how strongly the cell is oriented,
+and which way. Cells holding a definite edge are drawn with a line glyph running
+the same way (`|` `/` `-` `\`), so the jaw, hairline, nose and shoulders are
+*drawn* rather than shaded. Everything else falls back to the tone ramp.
+
+The tensor matters rather than just averaging the gradient: averaging cancels
+opposing gradients — the two sides of a nostril — and reports no edge where
+there plainly is one. Averaging gradient *products* keeps the orientation.
+
+Two things happen automatically:
+
+- **Inversion.** If the border of the frame is brighter than the middle — a
+  subject against a pale wall — the tones are flipped so the subject is drawn in
+  ink on empty paper. Without this the wall fills in solid and the face comes
+  out pale, which is backwards. Override with `--invert` / `--no-invert`.
+- **Background blanking.** Cells that are both flat and pale are left empty
+  rather than given the lightest ramp character, so the wall does not become a
+  field of stipple competing with the face.
+
+### Tuning
+
+If the result is not right, in rough order of usefulness:
+
+| Flag | Try | Does |
+| --- | --- | --- |
+| `--focus` | `0`–`1` | where to crop vertically, 0 is the top of the frame |
+| `--black-point` | `8`–`25` | higher empties more background |
+| `--edge-percentile` | `70`–`88` | lower draws more line work, higher more shading |
+| `--coherence` | `0.3`–`0.6` | how definite an edge must be to earn a line glyph |
+| `--floor` | `0.3`–`0.55` | how pale a flat cell must be before it is left blank |
+| `--flatten` | `0`–`1` | how much uneven lighting to divide out |
+
+`--no-edges` falls back to shading only, and `--help` lists the rest.
 
 You can also skip the photo and hand-edit `ascii_art.txt` directly. Anything up
 to 42 columns and 25 rows works; the card grows to fit if you go over.
+
+### Prior art
+
+The same idea, if you want to compare output: [p2ascii](https://github.com/Hugana/p2ascii)
+also uses Sobel gradients for orientation, [Asciimatic](https://github.com/dijkstracula/Asciimatic)
+builds on Canny edges, and [deep_ascii_converter](https://github.com/saiccoumar/deep_ascii_converter)
+takes a learned approach to the same problem.
 
 ## The typing animation
 
