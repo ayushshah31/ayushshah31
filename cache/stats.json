@@ -6,7 +6,6 @@
     0,
     0,
     0,
-    0,
     1,
     0,
     0,
@@ -32,6 +31,7 @@
     1,
     0,
     0,
+    0,
     0
   ],
   "contributions_year": 1299,
@@ -41,32 +41,32 @@
     {
       "color": "#DA5B0B",
       "name": "Jupyter Notebook",
-      "share": 0.23271311218990412
+      "share": 0.23269962810811995
     },
     {
       "color": "#3572A5",
       "name": "Python",
-      "share": 0.17513955073609416
+      "share": 0.17518734557521484
     },
     {
       "color": "#f1e05a",
       "name": "JavaScript",
-      "share": 0.15300132454272344
+      "share": 0.15299245919622964
     },
     {
       "color": "#00B4AB",
       "name": "Dart",
-      "share": 0.13187089408395714
+      "share": 0.13186325309671734
     },
     {
       "color": "#3178c6",
       "name": "TypeScript",
-      "share": 0.06445390117572254
+      "share": 0.06445016652722516
     },
     {
       "color": "#222c37",
       "name": "ShaderLab",
-      "share": 0.03472196935972082
+      "share": 0.03471995746675034
     }
   ],
   "languages": [
