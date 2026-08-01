@@ -41,32 +41,32 @@
     {
       "color": "#DA5B0B",
       "name": "Jupyter Notebook",
-      "share": 0.23269962810811995
+      "share": 0.23240959801550348
     },
     {
       "color": "#3572A5",
       "name": "Python",
-      "share": 0.17518734557521484
+      "share": 0.1762153682347221
     },
     {
       "color": "#f1e05a",
       "name": "JavaScript",
-      "share": 0.15299245919622964
+      "share": 0.1528017738158057
     },
     {
       "color": "#00B4AB",
       "name": "Dart",
-      "share": 0.13186325309671734
+      "share": 0.13169890254824726
     },
     {
       "color": "#3178c6",
       "name": "TypeScript",
-      "share": 0.06445016652722516
+      "share": 0.06436983770195366
     },
     {
       "color": "#222c37",
       "name": "ShaderLab",
-      "share": 0.03471995746675034
+      "share": 0.03467668351499722
     }
   ],
   "languages": [
