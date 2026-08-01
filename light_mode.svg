@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1080px" height="650px" font-size="16px" font-family="ConsolasFallback,Consolas,Menlo,monospace">
+<svg xmlns="http://www.w3.org/2000/svg" width="1080px" height="630px" font-size="16px" font-family="ConsolasFallback,Consolas,Menlo,monospace">
 <style>
 @font-face {
 src: local('Consolas'), local('Consolas Bold');
@@ -17,42 +17,42 @@ text, tspan {white-space: pre;}
 @media (prefers-reduced-motion: reduce) {
 text {clip-path: none !important;} .cursor {display: none;} }
 </style>
-<rect width="1080px" height="650px" fill="#ffffff" rx="15"/>
+<rect width="1080px" height="630px" fill="#ffffff" rx="15"/>
 <defs>
-<clipPath id="w0"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.0000;0.0533;1"/></rect></clipPath>
-<clipPath id="w1"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.0333;0.0867;1"/></rect></clipPath>
-<clipPath id="w2"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.0667;0.1200;1"/></rect></clipPath>
-<clipPath id="w3"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.1000;0.1533;1"/></rect></clipPath>
-<clipPath id="w4"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.1333;0.1867;1"/></rect></clipPath>
-<clipPath id="w5"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.1667;0.2200;1"/></rect></clipPath>
-<clipPath id="w6"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.2000;0.2533;1"/></rect></clipPath>
-<clipPath id="w7"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.2333;0.2867;1"/></rect></clipPath>
-<clipPath id="w8"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.2667;0.3200;1"/></rect></clipPath>
-<clipPath id="w9"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.3000;0.3533;1"/></rect></clipPath>
-<clipPath id="w10"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.3333;0.3867;1"/></rect></clipPath>
-<clipPath id="w11"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.3667;0.4200;1"/></rect></clipPath>
-<clipPath id="w12"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.4000;0.4533;1"/></rect></clipPath>
-<clipPath id="w13"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.4333;0.4867;1"/></rect></clipPath>
-<clipPath id="w14"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.4667;0.5200;1"/></rect></clipPath>
-<clipPath id="w15"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.5000;0.5533;1"/></rect></clipPath>
-<clipPath id="w16"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.5333;0.5867;1"/></rect></clipPath>
-<clipPath id="w17"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.5667;0.6200;1"/></rect></clipPath>
-<clipPath id="w18"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.6000;0.6533;1"/></rect></clipPath>
-<clipPath id="w19"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.6333;0.6867;1"/></rect></clipPath>
-<clipPath id="w20"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.6667;0.7200;1"/></rect></clipPath>
-<clipPath id="w21"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.7000;0.7533;1"/></rect></clipPath>
-<clipPath id="w22"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.7333;0.7867;1"/></rect></clipPath>
-<clipPath id="w23"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.7667;0.8200;1"/></rect></clipPath>
-<clipPath id="w24"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.8000;0.8533;1"/></rect></clipPath>
-<clipPath id="w25"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.8333;0.8867;1"/></rect></clipPath>
-<clipPath id="w26"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.8667;0.9200;1"/></rect></clipPath>
-<clipPath id="w27"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.9000;0.9533;1"/></rect></clipPath>
-<clipPath id="w28"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.9333;0.9867;1"/></rect></clipPath>
-<clipPath id="w29"><rect x="0" y="0" width="1080" height="650"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.9667;1.0000;1"/></rect></clipPath>
+<clipPath id="w0"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.0000;0.0533;1"/></rect></clipPath>
+<clipPath id="w1"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.0333;0.0867;1"/></rect></clipPath>
+<clipPath id="w2"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.0667;0.1200;1"/></rect></clipPath>
+<clipPath id="w3"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.1000;0.1533;1"/></rect></clipPath>
+<clipPath id="w4"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.1333;0.1867;1"/></rect></clipPath>
+<clipPath id="w5"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.1667;0.2200;1"/></rect></clipPath>
+<clipPath id="w6"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.2000;0.2533;1"/></rect></clipPath>
+<clipPath id="w7"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.2333;0.2867;1"/></rect></clipPath>
+<clipPath id="w8"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.2667;0.3200;1"/></rect></clipPath>
+<clipPath id="w9"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.3000;0.3533;1"/></rect></clipPath>
+<clipPath id="w10"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.3333;0.3867;1"/></rect></clipPath>
+<clipPath id="w11"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.3667;0.4200;1"/></rect></clipPath>
+<clipPath id="w12"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.4000;0.4533;1"/></rect></clipPath>
+<clipPath id="w13"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.4333;0.4867;1"/></rect></clipPath>
+<clipPath id="w14"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.4667;0.5200;1"/></rect></clipPath>
+<clipPath id="w15"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.5000;0.5533;1"/></rect></clipPath>
+<clipPath id="w16"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.5333;0.5867;1"/></rect></clipPath>
+<clipPath id="w17"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.5667;0.6200;1"/></rect></clipPath>
+<clipPath id="w18"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.6000;0.6533;1"/></rect></clipPath>
+<clipPath id="w19"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.6333;0.6867;1"/></rect></clipPath>
+<clipPath id="w20"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.6667;0.7200;1"/></rect></clipPath>
+<clipPath id="w21"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.7000;0.7533;1"/></rect></clipPath>
+<clipPath id="w22"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.7333;0.7867;1"/></rect></clipPath>
+<clipPath id="w23"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.7667;0.8200;1"/></rect></clipPath>
+<clipPath id="w24"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.8000;0.8533;1"/></rect></clipPath>
+<clipPath id="w25"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.8333;0.8867;1"/></rect></clipPath>
+<clipPath id="w26"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.8667;0.9200;1"/></rect></clipPath>
+<clipPath id="w27"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.9000;0.9533;1"/></rect></clipPath>
+<clipPath id="w28"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.9333;0.9867;1"/></rect></clipPath>
+<clipPath id="w29"><rect x="0" y="0" width="1080" height="630"><animate attributeName="width" begin="0.01s" dur="2.5s" fill="freeze" calcMode="linear" values="0;0;1080;1080" keyTimes="0;0.9667;1.0000;1"/></rect></clipPath>
 </defs>
 <text clip-path="url(#w0)" x="15" y="30" fill="#24292f">                                             ayush@shah -———————————————————————————————————————————————-—-</text>
 <text clip-path="url(#w1)" x="15" y="50" fill="#24292f">               ............                  <tspan class="cc">. </tspan><tspan class="key">OS</tspan>:<tspan class="cc"> ........................................... </tspan><tspan class="value">Ubuntu 24.04</tspan></text>
-<text clip-path="url(#w2)" x="15" y="70" fill="#24292f">            ..................               <tspan class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ........................ </tspan><tspan class="value" id="age_data">24 years, 0 months, 27 days</tspan></text>
+<text clip-path="url(#w2)" x="15" y="70" fill="#24292f">            ..................               <tspan class="cc">. </tspan><tspan class="key">Uptime</tspan>:<tspan class="cc" id="age_data_dots"> ........................ </tspan><tspan class="value" id="age_data">24 years, 0 months, 28 days</tspan></text>
 <text clip-path="url(#w3)" x="15" y="90" fill="#24292f">           .    ..      ..    .              <tspan class="cc">. </tspan><tspan class="key">Host</tspan>:<tspan class="cc"> ............................................... </tspan><tspan class="value">Google</tspan></text>
 <text clip-path="url(#w4)" x="15" y="110" fill="#24292f">           -===:::-====-:::===-              <tspan class="cc">. </tspan><tspan class="key">Kernel</tspan>:<tspan class="cc"> .................................. </tspan><tspan class="value">Software Engineer</tspan></text>
 <text clip-path="url(#w5)" x="15" y="130" fill="#24292f">           @@@bg@%b%@@%bM@gb@@@.             <tspan class="cc">. </tspan><tspan class="key">Editor</tspan>:<tspan class="cc"> ........................................ </tspan><tspan class="value">Antigravity</tspan></text>
@@ -80,5 +80,5 @@ text {clip-path: none !important;} .cursor {display: none;} }
 <text clip-path="url(#w27)" x="15" y="570" fill="#24292f">                                               <tspan fill="#DA5B0B">● </tspan><tspan class="value">Jupyter Notebook 23.3%</tspan>  <tspan fill="#3572A5">● </tspan><tspan class="value">Python 17.5%</tspan>  <tspan fill="#f1e05a">● </tspan><tspan class="value">JavaScript 15.3%</tspan>  </text>
 <text clip-path="url(#w28)" x="15" y="590" fill="#24292f">                                               <tspan fill="#00B4AB">● </tspan><tspan class="value">Dart 13.2%</tspan>  <tspan fill="#3178c6">● </tspan><tspan class="value">TypeScript 6.4%</tspan>  <tspan fill="#222c37">● </tspan><tspan class="value">ShaderLab 3.5%</tspan>  </text>
 <text clip-path="url(#w29)" x="15" y="610" fill="#24292f">                                               <tspan fill="#8b949e">● </tspan><tspan class="value">Other 20.8%</tspan>  </text>
-<rect class="cursor" x="15" y="617" width="10" height="16" fill="#24292f" opacity="0"><animate attributeName="opacity" begin="2.5s" dur="1.06s" repeatCount="indefinite" calcMode="discrete" values="1;0" keyTimes="0;0.55"/></rect>
+<rect class="cursor" x="602" y="597" width="10" height="16" fill="#24292f" opacity="0"><animate attributeName="opacity" begin="2.5s" dur="1.06s" repeatCount="indefinite" calcMode="discrete" values="1;0" keyTimes="0;0.55"/></rect>
 </svg>

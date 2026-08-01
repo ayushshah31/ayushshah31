@@ -330,8 +330,7 @@ def render(config, stats, ascii_art, uptime, theme):
 
     longest = max((sum(len(span) for span in line) for line in lines), default=0)
     width = config["card"].get("width", round(longest * CHAR_WIDTH) + MARGIN * 2)
-    # The animated card ends on an empty prompt line for the cursor to sit on.
-    height = LINE_HEIGHT * (len(lines) + (1 if animate else 0)) + MARGIN * 2
+    height = LINE_HEIGHT * len(lines) + MARGIN * 2
 
     out = [
         "<?xml version='1.0' encoding='UTF-8'?>",
@@ -403,11 +402,18 @@ def render(config, stats, ascii_art, uptime, theme):
                 f'fill="{palette["text"]}">{body}</text>'
             )
 
-        baseline = LINE_HEIGHT * (len(lines) + 1) + 10
-        # opacity="0" keeps the cursor off a card that never animates.
+        # The cursor rests one column past the last character printed, which is
+        # where a terminal would leave it. Parking it at column 0 of a fresh
+        # line instead strands it under the portrait, reading as a stray block
+        # rather than a cursor.
+        tail = "".join(span.text for span in lines[-1]).rstrip()
+        baseline = LINE_HEIGHT * len(lines) + 10
         out.append(
-            f'<rect class="cursor" x="{MARGIN}" y="{baseline - FONT_SIZE + 3}" '
+            f'<rect class="cursor" '
+            f'x="{MARGIN + round((len(tail) + 1) * CHAR_WIDTH)}" '
+            f'y="{baseline - FONT_SIZE + 3}" '
             f'width="{round(CHAR_WIDTH)}" height="{FONT_SIZE}" '
+            # opacity="0" keeps the cursor off a card that never animates.
             f'fill="{palette["text"]}" opacity="0">'
             f'<animate attributeName="opacity" begin="{duration}s" dur="1.06s" '
             f'repeatCount="indefinite" calcMode="discrete" '
